@@ -1,0 +1,8 @@
+x-meta:
+  service_name: covid-medical-exemptions
+  short_service_name: cme
+  service_base_path: covid-medical-exemptions
+  pipeline_name_prefix: Covid-Medical-Exemptions
+  product_display_name: Covid Medical Exemptions
+  product_description: Covid Medical Exemptions
+x-nhs-api-spec-guid: 7a0b9c38-abd4-41ec-83fd-04e373e5f519

@@ -1,0 +1,4 @@
+<APIProxy name="cme">
+  <!-- This is the root of the application -->
+  <Description>Proxy to Covid Medical Exemptions endpoints.</Description>
+</APIProxy>

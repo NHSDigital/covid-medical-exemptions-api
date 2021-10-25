@@ -1,0 +1,4 @@
+variables:
+  service_name: covid-medical-exemptions
+  short_service_name: cme
+  service_base_path: covid-medical-exemptions
