@@ -1,25 +1,35 @@
 {
-  "name": "covid-medical-exemptions",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "prestart": "npm install",
-    "start": "node index.js"
-  },
-  "license": "Unlicense",
-  "private": true,
-  "dependencies": {
-    "express": "^5.0.0-alpha.8",
-    "loglevel": "^1.7.1",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "chai": "^4 .2.0",
-    "mocha": "<7.0.0",
-    "mocha-junit-reporter": "^1.23.3",
-    "mocha-multi": "^1.1.3",
-    "nodemon": "^2.0.7",
-    "supertest": "^4.0.2"
-  }
+    "name": "covid-medical-exemption-api-sandbox",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "prestart": "npm install",
+        "start": "babel-node index.js",
+        "debug": "babel-node --debug-brk app.js",
+        "test": "NODE_ENV=test mocha --require @babel/register --reporter spec",
+        "test:report": "NODE_ENV=test mocha --require @babel/register --reporter mocha-junit-reporter --reporter-options mochaFile=../reports/tests/$(dirname).xml"
+    },
+    "license": "Unlicense",
+    "private": true,
+    "dependencies": {
+        "@babel/runtime": "^7.15.4",
+        "express": "^4.1.6",
+        "loglevel": "^1.7.1",
+        "swagger-express-middleware": "^4.0.2",
+        "swagger-ui": "^3.52.5",
+        "swagger-ui-express": "^4.1.6",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.15.8",
+        "@babel/node": "^7.15.8",
+        "@babel/preset-env": "^7.15.8",
+        "chai": "^4 .2.0",
+        "mocha": "<7.0.0",
+        "mocha-junit-reporter": "^1.23.3",
+        "mocha-multi": "^1.1.3",
+        "nodemon": "^2.0.7",
+        "supertest": "^4.0.2"
+    }
 }

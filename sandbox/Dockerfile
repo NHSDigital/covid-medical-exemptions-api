@@ -1,11 +1,13 @@
 FROM node:12
 
-COPY . /sandbox
+ENV SWAGGER_FILE 'specification/covid-medical-exemptions.yaml'
 
 WORKDIR /sandbox
 
-RUN npm install
-
 EXPOSE 9000
+
+COPY . /sandbox
+
+RUN npm install
 
 CMD ["npm", "start"]

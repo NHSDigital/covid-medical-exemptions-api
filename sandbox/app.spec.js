@@ -1,34 +1,29 @@
 
 const request = require("supertest");
 const assert = require("chai").assert;
-// const expect = require("chai").expect;
-
+import App from './app';
 
 describe("app handler tests", function () {
+    const version_info = {
+        build_label: "1233-shaacdef1",
+        releaseId: "1234",
+        commitId: "acdef12341ccc"
+    };
     let server;
     let env;
-    const version_info = {
-        build_label:"1233-shaacdef1",
-        releaseId:"1234",
-        commitId:"acdef12341ccc"
-    };
 
     before(function () {
-        env = process.env;
-        let app = require("./app");
-        app.setup({
-            VERSION_INFO: JSON.stringify(version_info),
-            LOG_LEVEL: (process.env.NODE_ENV === "test" ? "warn": "debug")
-        });
-        server = app.start();
+        let app = App({ }, process.env);
     });
 
     beforeEach(function () {
 
     });
+
     afterEach(function () {
 
     });
+
     after(function () {
         process.env = env;
         server.close();
@@ -40,7 +35,7 @@ describe("app handler tests", function () {
             .expect(200, {
                 status: "pass",
                 ping: "pong",
-                service: "covid-medical-exemptions",
+                service: "covid-medical-exemption",
                 version: version_info
             })
             .expect("Content-Type", /json/, done);
@@ -52,7 +47,7 @@ describe("app handler tests", function () {
             .expect(200, {
                 status: "pass",
                 ping: "pong",
-                service: "covid-medical-exemptions",
+                service: "covid-medical-exemption",
                 version: version_info
             })
             .expect("Content-Type", /json/, done);

@@ -1,32 +1,27 @@
-"use strict";
+import path from 'path';
+import App from './app';
 
-const app = require("./app");
+const {
+    HOST = 'localhost',
+    PORT = 9000,
+    APP_NAME = 'covid-medical-exemptions',
+    VERSION_INFO = '{}',
+    SWAGGER_FILE = null
+} = process.env;
 
-app.setup(process.env);
+const dependencies = { };
 
-const server = app.start(process.env);
-
-
-const signals = {
-    'SIGHUP': 1,
-    'SIGINT': 2,
-    'SIGTERM': 15
+const swaggerFile = path.join(__dirname, SWAGGER_FILE || '../specification/covid-medical-exemptions.yaml');
+const config = {
+    HOST,
+    PORT,
+    APP_NAME,
+    VERSION_INFO: JSON.parse(VERSION_INFO),
+    SWAGGER_FILE: swaggerFile
 };
 
-const shutdown = (signal, value) => {
-    console.log("shutdown!");
-    server.close(() => {
-        console.log(`server stopped by ${signal} with value ${value}`);
-        process.exit(128 + value);
-    });
-};
+const app = App(dependencies, config);
 
-Object.keys(signals).forEach((signal) => {
-    process.on(signal, () => {
-        console.log(`process received a ${signal} signal`);
-        shutdown(signal, signals[signal]);
-    });
+const server = app.listen(PORT, function() {
+    console.log(`listening http://localhost:${PORT}/`);
 });
-
-
-module.exports = {server: server};

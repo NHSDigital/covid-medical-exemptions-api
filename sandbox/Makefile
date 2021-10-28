@@ -5,6 +5,7 @@ list:
 	@grep '^[^#[:space:]].*:' Makefile
 
 build:
+	cp -R ../specification .
 	docker build .
 
 clean:
@@ -17,7 +18,7 @@ update:
 	npm update
 
 test:
-	NODE_ENV=test npx mocha --reporter spec
+	npm test
 
 test-report:
-	NODE_ENV=test npx mocha --reporter mocha-junit-reporter --reporter-options mochaFile=../../reports/tests/$(dirname).xml || true
+	NODE_ENV=test npx mocha --reporter mocha-junit-reporter --reporter-options mochaFile=../reports/tests/$(dirname).xml || true
