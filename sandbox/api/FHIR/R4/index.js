@@ -18,10 +18,9 @@ export default function(dependencies, config) {
     router.get('/CovidMedicalExemption', (req, res, next) => {
         try {
             const [type, id] = req.query['patient.identifier'].split('|');
-            const includes = req.query['_includes'] || 'Exemption:Patient';
             const ix = parseInt(id, 10) % responses.length;
             console.log("Response:", ix);
-            const response = responses[ix](id, includes === 'Exemption:Patient');
+            const response = responses[ix](id);
             res.status(200).json(response);
         } catch(err) {
             next(err);

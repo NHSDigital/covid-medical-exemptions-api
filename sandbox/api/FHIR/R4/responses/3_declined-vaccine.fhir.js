@@ -1,4 +1,4 @@
-export default (id, includePatient) => ({
+export default (id) => ({
     "resourceType": "Bundle",
     "type": "searchset",
     "entry": [
@@ -55,26 +55,6 @@ export default (id, includePatient) => ({
                     }
                 ]
             }
-        },
-        ...(includePatient ? [{
-            "resource": {
-                "resourceType": "Patient",
-                "identifier": [
-                    {
-                        "system": "https://fhir.nhs.uk/Id/nhs-number",
-                        "value": id
-                    }
-                ],
-                "name": [
-                    {
-                        "use": "official",
-                        "given": ["John", "Jonah"],
-                        "family": "Jameson"
-                    }
-                ],
-                "birthDate": "1960-01-01"
-            }
-        }] : [])
-
+        }
     ]
 });

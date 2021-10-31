@@ -1,4 +1,4 @@
-export default (id, includePatient) => ({
+export default (id) => ({
     "resourceType": "Bundle",
     "type": "searchset",
     "entry": [

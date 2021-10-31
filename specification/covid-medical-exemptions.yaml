@@ -190,14 +190,6 @@ paths:
             type: string
             pattern: ^https:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|[0-9]+$
             example: "https://fhir.nhs.uk/Id/nhs-number|9912003888"
-        - name: _include
-          in: query
-          description: |
-            Specifies other resources to be included in the response along with the exemptions.
-            Must be `Exemption:patient`, which will include patient demographic details.
-          schema:
-            type: string
-            example: "\"Exemption:patient\""
         - name: Authorization
           in: header
           description: |
