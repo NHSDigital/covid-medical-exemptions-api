@@ -1,5 +1,6 @@
 export default (id, includePatient) => ({
     "resourceType": "Bundle",
+    "type": "searchset",
     "entry": includePatient ? [{
         "resource": {
             "resourceType": "Patient",

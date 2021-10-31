@@ -182,32 +182,29 @@ paths:
       parameters:
         - name: patient.identifier
           in: query
-          type: string
-          pattern: ^https:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|[0-9]+$
           description: |
             The patient's NHS number.
             Expressed as `<type>|<value>` where `<type>` must be `https://fhir.nhs.uk/Id/nhs-number` and `<value>` must be a [valid NHS number](https://www.datadictionary.nhs.uk/data_dictionary/attributes/n/nhs/nhs_number_de.asp).
           required: true
           schema:
             type: string
+            pattern: ^https:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|[0-9]+$
             example: "https://fhir.nhs.uk/Id/nhs-number|9912003888"
         - name: _include
           in: query
           description: |
             Specifies other resources to be included in the response along with the exemptions.
             Must be `Exemption:patient`, which will include patient demographic details.
-          required: true
           schema:
             type: string
-            example: "Exemption:patient"
+            example: "\"Exemption:patient\""
         - name: Authorization
           in: header
           description: |
             An OAuth 2.0 bearer token, obtained using our [NHS login pattern](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/user-restricted-restful-apis-nhs-login-separate-authentication-and-authorisation).
-          required: true
           schema:
             type: string
-            format: '^Bearer\ [[:ascii:]]+$'
+            pattern: '^Bearer\ [[:ascii:]]+$'
             example: 'Bearer g1112R_ccQ1Ebbb4gtHBP1aaaNM'
         - name: X-Correlation-ID
           in: header
@@ -218,7 +215,8 @@ paths:
             Mirrored back in a response header.
           schema:
             type: string
-            example: 11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA
+            format: uuid
+            example: "\"11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA\""
       responses:
         '200':
           description: |
@@ -231,8 +229,8 @@ paths:
             application/fhir+json:
               schema:
                 $ref: "components/schemas/fhir.schema.json#/definitions/Bundle"
-              example:
-                $ref: "components/examples/exempt-vaccine-and-testing.fhir.json"
+          #     example:
+          #       $ref: "components/examples/exempt-vaccine-and-testing.fhir.json"
         '4XX':
           description: |
             An error occurred as follows:
@@ -256,9 +254,12 @@ paths:
 # components object must be present for spec rendering to work in Bloomreach, even if the spec has no components
 components:
   schemas:
-    Bundle:
-      $ref: components/schemas/fhir.schema.json#/definitions/Bundle
-    Patient:
-      $ref: components/schemas/fhir.schema.json#/definitions/Patient
-    QuestionnaireResponse:
-      $ref: components/schemas/fhir.schema.json#/definitions/QuestionnaireResponse
+    # Bundle:
+    #   $ref: components/schemas/fhir.schema.json#/definitions/Bundle
+    # Patient:
+    #   $ref: components/schemas/fhir.schema.json#/definitions/Patient
+    # QuestionnaireResponse:
+    #   $ref: components/schemas/fhir.schema.json#/definitions/QuestionnaireResponse
+    Status:
+      type: object
+      additionalProperties: true

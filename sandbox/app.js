@@ -1,4 +1,3 @@
-import createMiddleware from 'swagger-express-middleware';
 import { serve, setup } from "swagger-ui-express";
 import yaml from 'js-yaml';
 import fs from 'fs';
@@ -6,11 +5,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import api from './api';
 import { logging, errorHandler, notFound } from './middleware';
+import * as OpenApiValidator from 'express-openapi-validator';
 
 export default function(dependencies, config) {
     const app = express();
     app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(bodyParser.json());
+    app.use(express.json());
 
     app.locals.app_name = config.APP_NAME;
     app.locals.version_info = config.VERSION_INFO;
@@ -22,19 +22,14 @@ export default function(dependencies, config) {
 
     app.use(logging);
     app.use('/swagger', serve, setup(swagger));
-    createMiddleware(config.SWAGGER_FILE, app, (_err, middleware) => {
-        app.use(
-            middleware.metadata(),
-            middleware.CORS(),
-            middleware.files(),
-            middleware.parseRequest(),
-            middleware.validateRequest(),
-            // middleware.mock(),
-        );
-        app.use('/', api(dependencies, config));
-        app.use(notFound);
-        app.use(errorHandler);      
-    });
+    app.use(OpenApiValidator.middleware({
+        apiSpec: config.SWAGGER_FILE,
+        validateRequest: false,
+        validateResponse: false,
+    }));
+    app.use('/', api(dependencies, config));
+    app.use(notFound);
+    app.use(errorHandler);      
 
     return app;
 }

@@ -1,5 +1,7 @@
+
 export default (id, includePatient) => ({
     "resourceType": "Bundle",
+    // "type": "searchset",
     "entry": [
         {
             "resource": {
@@ -14,7 +16,7 @@ export default (id, includePatient) => ({
                             "value": id
                         }
                     ],
-                    "display": "Ivor Fritagelse"
+                    "display": "John Jonah Jameson"
                 },
                 "authored": "2021-08-13T17:15:00+00:00",
                 "item": [
@@ -23,8 +25,8 @@ export default (id, includePatient) => ({
                         "answer": [
                             {
                                 "valueCoding": {
-                                    "code": "2",
-                                    "display": "Approved: Exemption from COVID vaccination"
+                                    "code": "4",
+                                    "display": "Declined: Exemption from COVID vaccination and testing"
                                 }
                             }
                         ]

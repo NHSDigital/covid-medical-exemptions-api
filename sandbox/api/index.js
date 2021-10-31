@@ -17,10 +17,6 @@ export default function(dependencies, config) {
     router.get('/ping', status);
     router.get('/health', status);
 
-    router.get('/hello', (req, res) => {
-        res.status(200).json({ message: 'Hello World' });
-    });
-
     router.use('/FHIR', FHIR(dependencies, config));
 
     return router;

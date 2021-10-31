@@ -13,6 +13,7 @@
   "homepage": "https://github.com/NHSDigital/covid-medical-exemptions",
   "dependencies": {
     "newman-reporter-htmlextra": "^1.20.1",
+    "openapi-validator-middleware": "^3.2.3",
     "speccy": "^0.2.2"
   },
   "devDependencies": {

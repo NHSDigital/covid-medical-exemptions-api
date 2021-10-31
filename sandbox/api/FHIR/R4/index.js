@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import response0 from './responses/empty-response.fhir';
-import response1 from './responses/exempt-vaccine.fhir';
-import response2 from './responses/exempt-vaccine-and-testing.fhir';
-import response3 from './responses/declined-vaccine.fhir';
-import response4 from './responses/declined-vaccine-and-testing.fhir';
+import response1 from './responses/1_exempt-vaccine.fhir';
+import response2 from './responses/2_exempt-vaccine-and-testing.fhir';
+import response3 from './responses/3_declined-vaccine.fhir';
+import response4 from './responses/4_declined-vaccine-and-testing.fhir';
 const responses = [
     response0,
     response1,
