@@ -20,7 +20,7 @@ export default function(dependencies, config) {
             const [type, id] = req.query['patient.identifier'].split('|');
             const includes = req.query['_includes'] || 'Exemption:Patient';
             const ix = parseInt(id, 10) % responses.length;
-            console.log(ix);
+            console.log("Response:", ix);
             const response = responses[ix](id, includes === 'Exemption:Patient');
             res.status(200).json(response);
         } catch(err) {

@@ -1,15 +1,32 @@
 ---
 type: object
-description: "A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to.",
+description: |
+  A structured set of questions and their answers. The questions are ordered 
+  and grouped into coherent subsets, corresponding to the structure of the 
+  grouping of the questionnaire being responded to.
 properties:
   resourceType:
+    description: |
+      This is a QuestionnaireResponse resource
     type: string
   id:
+    description: |
+      The logical id of the resource, as used in the URL for the resource. Once
+      assigned, this value never changes.
     type: string
   questionnaire:
+    description: |
+      The Questionnaire that defines and organizes the questions for which 
+      answers are being provided.
     type: string
   status:
     type: string
+    enum:
+    - in-progress
+    - completed
+    - amended
+    - entered-in-error
+    - stopped
   subject:
     $ref: ./QuestionnaireResponse_Subject.schema.yaml
   contained:
