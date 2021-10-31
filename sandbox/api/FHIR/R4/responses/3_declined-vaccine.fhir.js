@@ -1,6 +1,6 @@
 export default (id, includePatient) => ({
     "resourceType": "Bundle",
-    // "type": "searchset",
+    "type": "searchset",
     "entry": [
         {
             "resource": {
@@ -17,6 +17,13 @@ export default (id, includePatient) => ({
                     ],
                     "display": "John Jonah Jameson"
                 },
+                "contained": [
+                    {
+                        "id": "p1",
+                        "resourceType": "Patient",
+                        "birthDate": "1960-01-01"
+                    }
+                ],
                 "authored": "2021-08-13T17:15:00+00:00",
                 "item": [
                     {

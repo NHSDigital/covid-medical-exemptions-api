@@ -18,6 +18,13 @@
                     ],
                     "display": "Ivor Fritagelse"
                 },
+                "contained": [
+                    {
+                        "id": "p1",
+                        "resourceType": "Patient",
+                        "birthDate": "1960-01-01"
+                    }
+                ],
                 "authored": "2021-08-13T17:15:00+00:00",
                 "item": [
                     {
@@ -48,24 +55,6 @@
                         ]
                     }
                 ]
-            }
-        },
-        {
-            "fullUrl" : "Patient/2fa8f1b8-caea-4f3d-9978-c0839da568b2",
-            "resource": {
-                "resourceType": "Patient",
-                "id": "9912003888",
-                "name": [
-                    {
-                        "use": "official",
-                        "given": [
-                            "John",
-                            "Jonah"
-                        ],
-                        "family": "Jameson"
-                    }
-                ],
-                "birthDate": "1960-01-01"
             }
         }
     ]
