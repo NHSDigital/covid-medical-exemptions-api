@@ -4,6 +4,8 @@ properties:
     type: string
   resourceType:
     type: string
+    enum:
+    - Patient
   birthDate:
     type: string
 additionalProperties: false
