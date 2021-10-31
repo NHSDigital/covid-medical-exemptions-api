@@ -1,0 +1,12 @@
+type: object
+properties:
+  linkId:
+    type: string
+  answer:
+    type: array
+    items:
+      $ref: ./QuestionnaireResponse_Answer.schema.yaml
+additionalProperties: false
+required:
+- linkId
+- answer

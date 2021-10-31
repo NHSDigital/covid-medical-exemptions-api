@@ -1,0 +1,13 @@
+type: object
+properties:
+  id:
+    type: string
+  resourceType:
+    type: string
+  birthDate:
+    type: string
+additionalProperties: false
+required:
+- id
+- resourceType
+- birthDate

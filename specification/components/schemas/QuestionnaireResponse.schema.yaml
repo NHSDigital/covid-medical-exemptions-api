@@ -1,0 +1,22 @@
+---
+type: object
+properties:
+  resourceType:
+    type: string
+  id:
+    type: string
+  questionnaire:
+    type: string
+  status:
+    type: string
+  subject:
+    $ref: ./QuestionnaireResponse_Subject.schema.yaml
+  contained:
+    $ref: ./QuestionnaireResponse_Contained.schema.yaml
+  authored:
+    type: string
+  item:
+    type: array
+    items:
+      $ref: ./QuestionnaireResponse_Item.schema.yaml
+additionalProperties: false

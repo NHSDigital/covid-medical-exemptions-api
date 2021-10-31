@@ -1,0 +1,8 @@
+---
+type: object
+properties:
+  fullUrl:
+    type: string
+  resource:
+    $ref: ./QuestionnaireResponse.schema.yaml
+additionalProperties: false

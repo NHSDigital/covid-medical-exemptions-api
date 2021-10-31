@@ -1,0 +1,17 @@
+type: object
+properties:
+  identifier:
+    type: array
+    items:
+      type: object
+      properties:
+        system:
+          type: string
+        value:
+          type: string
+  display:
+    type: string
+additionalProperties: false
+required:
+- identifier
+- display

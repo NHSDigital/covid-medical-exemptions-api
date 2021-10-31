@@ -228,7 +228,7 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: "#/definitions/Bundle"
+                $ref: "#/components/schemas/Bundle"
               example:
                 $ref: "components/examples/exempt-vaccine-and-testing.fhir.json"
         '4XX':
@@ -255,6 +255,8 @@ paths:
 components:
   schemas:
     Bundle:
-      $ref: components/schemas/fhir.schema.json#/definitions/Bundle
+      $ref: components/schemas/Bundle.schema.yaml
     QuestionnaireResponse:
-      $ref: components/schemas/fhir.schema.json#/definitions/QuestionnaireResponse
+      $ref: components/schemas/QuestionnaireResponse.schema.yaml
+    OperationOutcome:
+      $ref: components/schemas/OperationOutcome.yaml

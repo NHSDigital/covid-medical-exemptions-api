@@ -24,8 +24,8 @@ export default function(dependencies, config) {
     app.use('/swagger', serve, setup(swagger));
     app.use(OpenApiValidator.middleware({
         apiSpec: config.SWAGGER_FILE,
-        validateRequest: false,
-        validateResponse: false,
+        validateRequest: true,
+        validateResponse: true,
     }));
     app.use('/', api(dependencies, config));
     app.use(notFound);
