@@ -228,9 +228,9 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: "components/schemas/fhir.schema.json#/definitions/Bundle"
-          #     example:
-          #       $ref: "components/examples/exempt-vaccine-and-testing.fhir.json"
+                $ref: "#/definitions/Bundle"
+              example:
+                $ref: "components/examples/exempt-vaccine-and-testing.fhir.json"
         '4XX':
           description: |
             An error occurred as follows:
@@ -247,19 +247,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: 'components/schemas/OperationOutcome.yaml'
+                $ref: '#/components/schemas/OperationOutcome'
               example:
                 $ref: 'components/examples/OperationOutcome.json'
 
 # components object must be present for spec rendering to work in Bloomreach, even if the spec has no components
 components:
   schemas:
-    # Bundle:
-    #   $ref: components/schemas/fhir.schema.json#/definitions/Bundle
-    # Patient:
-    #   $ref: components/schemas/fhir.schema.json#/definitions/Patient
-    # QuestionnaireResponse:
-    #   $ref: components/schemas/fhir.schema.json#/definitions/QuestionnaireResponse
-    Status:
-      type: object
-      additionalProperties: true
+    Bundle:
+      $ref: components/schemas/fhir.schema.json#/definitions/Bundle
+    QuestionnaireResponse:
+      $ref: components/schemas/fhir.schema.json#/definitions/QuestionnaireResponse
