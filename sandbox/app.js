@@ -20,8 +20,22 @@ export default function(dependencies, config) {
     const swagger = yaml.load(swaggerRaw);
     swagger.host = `${config.HOST}:${config.PORT}`;
 
+
+    const status = (req, res) => {
+        res.status(200).json({
+            status: "pass",
+            ping: "pong",
+            service: req.app.locals.app_name,
+            version: req.app.locals.version_info
+        });
+    }
+
     app.use(logging);
     app.use('/swagger', serve, setup(swagger));
+    app.get('/_status', status);
+    app.get('/_ping', status);
+    app.get('/health', status);
+
     app.use(OpenApiValidator.middleware({
         apiSpec: config.SWAGGER_FILE,
         validateRequest: true,
