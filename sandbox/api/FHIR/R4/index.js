@@ -1,15 +1,15 @@
 import { Router } from 'express';
-import response0 from './responses/empty-response.fhir';
-import response1 from './responses/1_exempt-vaccine.fhir';
-import response2 from './responses/2_exempt-vaccine-and-testing.fhir';
-import response3 from './responses/3_declined-vaccine.fhir';
-import response4 from './responses/4_declined-vaccine-and-testing.fhir';
+import empty from './responses/empty-response.fhir';
+import exemptVaccination from './responses/1_exempt-vaccine.fhir';
+import exemptVaccinationAndTest from './responses/2_exempt-vaccine-and-testing.fhir';
+import declinedVaccination from './responses/3_declined-vaccine.fhir';
+import declinedVaccinationAndTest from './responses/4_declined-vaccine-and-testing.fhir';
 const responses = [
-    response0,
-    response1,
-    response2,
-    response3,
-    response4
+    empty,
+    exemptVaccination,
+    exemptVaccinationAndTest,
+    declinedVaccination,
+    declinedVaccinationAndTest
 ];
 
 export default function(dependencies, config) {
