@@ -1,0 +1,21 @@
+type: object
+description: |
+  The subject of the questionnaire response.  This could be a patient, 
+  organization, practitioner, device, etc.  This is who/what the answers 
+  apply to, but is not necessarily the source of information.
+properties:
+  identifier:
+    type: array
+    items:
+      type: object
+      properties:
+        system:
+          type: string
+        value:
+          type: string
+  display:
+    type: string
+additionalProperties: false
+required:
+- identifier
+- display

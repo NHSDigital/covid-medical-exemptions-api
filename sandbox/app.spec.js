@@ -1,34 +1,28 @@
-
 const request = require("supertest");
 const assert = require("chai").assert;
-// const expect = require("chai").expect;
-
+import App from './app';
 
 describe("app handler tests", function () {
+    const APP_NAME = 'covid-medical-exemption';
+    const SWAGGER_FILE = '../specification/covid-medical-exemptions.yaml';
+    const VERSION_INFO = {
+        build_label: "1233-shaacdef1",
+        releaseId: "1234",
+        commitId: "acdef12341ccc"
+    };
     let server;
     let env;
-    const version_info = {
-        build_label:"1233-shaacdef1",
-        releaseId:"1234",
-        commitId:"acdef12341ccc"
-    };
 
     before(function () {
-        env = process.env;
-        let app = require("./app");
-        app.setup({
-            VERSION_INFO: JSON.stringify(version_info),
-            LOG_LEVEL: (process.env.NODE_ENV === "test" ? "warn": "debug")
+        server = App({ 
+        
+        }, {
+            APP_NAME,
+            SWAGGER_FILE,
+            VERSION_INFO,
         });
-        server = app.start();
     });
 
-    beforeEach(function () {
-
-    });
-    afterEach(function () {
-
-    });
     after(function () {
         process.env = env;
         server.close();
@@ -40,8 +34,8 @@ describe("app handler tests", function () {
             .expect(200, {
                 status: "pass",
                 ping: "pong",
-                service: "covid-medical-exemptions",
-                version: version_info
+                service: APP_NAME,
+                version: VERSION_INFO
             })
             .expect("Content-Type", /json/, done);
     });
@@ -52,16 +46,22 @@ describe("app handler tests", function () {
             .expect(200, {
                 status: "pass",
                 ping: "pong",
-                service: "covid-medical-exemptions",
-                version: version_info
+                service: APP_NAME,
+                version: VERSION_INFO
             })
             .expect("Content-Type", /json/, done);
     });
 
-    it("responds to /hello", (done) => {
+    it("responds to /health", (done) => {
         request(server)
-            .get("/hello")
-            .expect(200, done);
+            .get("/health")
+            .expect(200, {
+                status: "pass",
+                ping: "pong",
+                service: APP_NAME,
+                version: VERSION_INFO
+            })
+            .expect("Content-Type", /json/, done);
     });
 });
 

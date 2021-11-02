@@ -1,6 +1,5 @@
 {
     "resourceType": "Bundle",
-    "type": "searchset",
     "entry": [
         {
             "resource": {
@@ -17,13 +16,6 @@
                     ],
                     "display": "Ivor Fritagelse"
                 },
-                "contained": [
-                    {
-                        "id": "p1",
-                        "resourceType": "Patient",
-                        "birthDate": "1960-01-01"
-                    }
-                ],
                 "authored": "2021-08-13T17:15:00+00:00",
                 "item": [
                     {
@@ -31,8 +23,8 @@
                         "answer": [
                             {
                                 "valueCoding": {
-                                    "code": "3",
-                                    "display": "Declined: Exemption from COVID vaccination"
+                                    "code": "4",
+                                    "display": "Declined: Exemption from COVID vaccination and testing"
                                 }
                             }
                         ]
@@ -54,6 +46,22 @@
                         ]
                     }
                 ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Patient",
+                "name": [
+                    {
+                        "use": "official",
+                        "given": [
+                            "John",
+                            "Jonah"
+                        ],
+                        "family": "Jameson"
+                    }
+                ],
+                "birthDate": "1960-01-01"
             }
         }
     ]

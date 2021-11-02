@@ -1,6 +1,5 @@
 {
     "resourceType": "Bundle",
-    "type": "searchset",
     "entry": [
         {
             "resource": {
@@ -9,7 +8,7 @@
                 "questionnaire": "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption",
                 "status": "completed",
                 "subject": {
-                    "identifier": [
+                    "identifier":  [
                         {
                             "system": "https://fhir.nhs.uk/Id/nhs-number",
                             "value": "9912003888"
@@ -17,29 +16,22 @@
                     ],
                     "display": "Ivor Fritagelse"
                 },
-                "contained": [
-                    {
-                        "id": "p1",
-                        "resourceType": "Patient",
-                        "birthDate": "1960-01-01"
-                    }
-                ],
                 "authored": "2021-08-13T17:15:00+00:00",
-                "item": [
+                "item":  [
                     {
                         "linkId": "exemptionStatus",
-                        "answer": [
+                        "answer":  [
                             {
                                 "valueCoding": {
-                                    "code": "3",
-                                    "display": "Declined: Exemption from COVID vaccination"
+                                    "code": "2",
+                                    "display": "Approved: Exemption from COVID vaccination and testing"
                                 }
                             }
                         ]
                     },
                     {
                         "linkId": "exemptionPeriodStart",
-                        "answer": [
+                        "answer":  [
                             {
                                 "valueDateTime": "2021-08-13T17:15:00+00:00"
                             }
@@ -47,13 +39,25 @@
                     },
                     {
                         "linkId": "exemptionPeriodEnd",
-                        "answer": [
+                        "answer":  [
                             {
                                 "valueDateTime": "2022-08-13T17:15:00+00:00"
                             }
                         ]
                     }
                 ]
+            }        },
+        {
+            "resource": {
+                "resourceType": "Patient",
+                "name": [
+                    {
+                        "use": "official",
+                        "given": [ "John", "Jonah" ],
+                        "family": "Jameson"
+                    }
+                ],
+                "birthDate": "1960-01-01"
             }
         }
     ]

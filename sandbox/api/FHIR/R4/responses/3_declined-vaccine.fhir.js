@@ -1,4 +1,4 @@
-{
+export default (id) => ({
     "resourceType": "Bundle",
     "type": "searchset",
     "entry": [
@@ -12,10 +12,10 @@
                     "identifier": [
                         {
                             "system": "https://fhir.nhs.uk/Id/nhs-number",
-                            "value": "9912003888"
+                            "value": id
                         }
                     ],
-                    "display": "Ivor Fritagelse"
+                    "display": "John Jonah Jameson"
                 },
                 "contained": [
                     {
@@ -57,4 +57,4 @@
             }
         }
     ]
-}
+});

@@ -1,0 +1,20 @@
+---
+type: object
+properties:
+  resourceType:
+    type: string
+    enum:
+    - Bundle
+  type:
+    type: string
+    enum:
+    - searchset
+  entry:
+    type: array
+    items:
+      $ref: ./Bundle_Entry.schema.yaml
+additionalProperties: false
+required:
+- resourceType
+- type
+- entry
