@@ -57,7 +57,7 @@ class TestEndpoints:
             client_id=test_app.client_id,
             client_secret=test_app.client_secret,
             redirect_uri=test_app.callback_url
-            )
+        )
         token_resp = await oauth.get_token_response(grant_type="authorization_code")
         assert token_resp["status_code"] == 200
         return token_resp['body']

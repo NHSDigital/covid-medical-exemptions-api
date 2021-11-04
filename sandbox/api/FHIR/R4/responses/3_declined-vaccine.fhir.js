@@ -31,6 +31,7 @@ export default (id) => ({
                         "answer": [
                             {
                                 "valueCoding": {
+                                    "system": "https://fhir.nhs.uk/CodeSystem/covid-vaccination-medical-exemption",
                                     "code": "3",
                                     "display": "Declined: Exemption from COVID vaccination"
                                 }
