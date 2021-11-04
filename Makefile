@@ -43,6 +43,7 @@ build-proxy:
 _dist_include="pytest.ini poetry.lock poetry.toml pyproject.toml Makefile build/. tests"
 
 release: clean publish build-proxy
+	make -C sandbox build
 	mkdir -p dist
 	for f in $(_dist_include); do cp -r $$f dist; done
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox.yml
