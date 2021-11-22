@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="covid-medical-exemptions-target">
+  <FaultRules>
+    <FaultRule name="access_token_invalid">
+      <Step>
+        <Name>RaiseFault.InvalidAccessToken</Name>
+      </Step>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
+    </FaultRule>
+    <FaultRule name="RaiseFault.MissingNHSDUserIdentity">
+      <Step>
+        <Name>RaiseFault.MissingNHSDUserIdentity</Name>
+      </Step>
+      <Condition>error.message Equals "Failed to Resolve Variable : policy(AssignMessage.AddUserIdHeader) variable(accesstoken.id_token)"</Condition>
+    </FaultRule>
+    <FaultRule name="allow_raisefaults">
+      <!-- prevent the DefaultFaultRule from executing when RaiseFault is used in a flow -->
+      <Step>
+        <Name>AssignMessage.CatchallErrorMessage</Name>
+         <Condition>(fault.name NotEquals "RaiseFault")</Condition>
+      </Step>
+      <Condition>(fault.name Equals "RaiseFault")</Condition>
+      </FaultRule>
+  </FaultRules>
+  <PreFlow>
+    <Request>
+      <Step>
+        <Name>OauthV2.VerifyAccessToken</Name>
+      </Step>
+      <Step>
+        <Name>AssignMessage.AddUserIdHeader</Name>
+        <Condition>accesstoken.auth_type == "user"</Condition>
+      </Step>
+      <Step>
+        <Name>RaiseFault.MissingNHSDUserIdentity</Name>
+        <Condition>(accesstoken.auth_type == "user") and ((request.header.NHSD-User-Identity Is null) or (request.header.NHSD-User-Identity Equals ""))</Condition>
+      </Step>
+      <Step>
+        <Name>AccessEntity.GetApp</Name>
+      </Step>
+      <Step>
+        <Name>ExtractVariables.GetProofingLevel</Name>
+      </Step>
+      <Step>
+        <Name>Javascript.AddClientRPDetailsHeader</Name>
+      </Step>
+      <Step>
+        <Name>Quota</Name>
+      </Step>
+      <Step>
+        <Name>SpikeArrest</Name>
+      </Step>
+    </Request>
+  </PreFlow>
+  <!--
+    To point to a named target server as this is how it SHOULD be implemented:
+    For example:
+    <HTTPTargetConnection>
+      <SSLInfo>
+        <Enabled>true</Enabled>
+      </SSLInfo>
+      <LoadBalancer>
+        <Server name="covid-medical-exemptions" />
+      </LoadBalancer>
+    </HTTPTargetConnection>
+  -->
+  <HTTPTargetConnection>
+    <URL>http://mocktarget.apigee.net</URL>
+    <Properties>
+      <Property name="supports.http10">true</Property>
+      <Property name="request.retain.headers">User-Agent,Referer,Accept-Language</Property>
+      <Property name="retain.queryparams">apikey</Property>
+    </Properties>
+  </HTTPTargetConnection>
+</TargetEndpoint>
