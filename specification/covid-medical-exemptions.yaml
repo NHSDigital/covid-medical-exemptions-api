@@ -17,11 +17,11 @@ info:
     Use this API to access a patient’s COVID medical exemption status.
 
     You can:
-    - get a patient's coronavirus (COVID-19) medical exemptin status, based on their NHS number
+    - get a patient's coronavirus (COVID-19) medical exemption status, based on their NHS number
 
     You get the following data:
     - current covid medical exemption status
-    - patient demographic details, include birthDate
+    - embedded patient demographic details, include birthDate
 
     The patient demographic details might differ from those held in the [Personal Demographics Service (PDS)](https://digital.nhs.uk/services/demographics).
     To get demographic details from PDS, use the [Personal Demographics Service FHIR API](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir).
@@ -39,7 +39,6 @@ info:
     External definitions:
       * https://simplifier.net/guide/nhsdigital/Questionnaire
       * https://simplifier.net/guide/nhsdigital/QuestionnaireResponse
-
 
     ### Data availability, timing and quality
     All exemption records are verified to ensure the NHS number is correct before making them available via the API.
@@ -83,7 +82,7 @@ info:
 
     You don’t need to know much about FHIR to use this API - FHIR APIs are just RESTful APIs that follow specific rules.
     In particular:
-    - resource names are capitalised and singular, and use US spellings, for example `/CovidMedicalExemption` not `/covidmedicalexemption`
+    - resource names are capitalised and singular, and use US spellings, for example `/QuestionnaireResponse` not `/questionnaireresponse`
     - array names are singular, for example `entry` not `entries` for address lines
     - data items that are country-specific and thus not included in the FHIR global base resources are usually wrapped in an `extension` object
 
@@ -95,14 +94,16 @@ info:
     For more details see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
 
     ## Security and authorisation
-    This API is [user-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#user-restricted-apis),
-    meaning an end user must be present and authenticated.
+    This API is offers both:
+      * [user-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#user-restricted-apis)
+      * [application restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis)
 
     Specifically, it uses the following security pattern:
     - [User-restricted RESTful APIs - NHS login separate authentication and authorisation](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/user-restricted-restful-apis-nhs-login-separate-authentication-and-authorisation)
+    - [Application-restricted - Application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis)
 
     Note that:
-    - the end user must be a patient
+    - for user-restricted the end user must be a patient
     - the calling application must strongly authenticate the end user using NHS login
     - the end user must have their identity verified to 'high' (P9) level
     - the NHS number in the request must match the NHS number in the NHS login account
@@ -111,9 +112,9 @@ info:
     | Environment       | Base URL                                                                |
     | ----------------- | ----------------------------------------------------------------------- |
     | Local             | `http://localhost:9000/FHIR/R4/`                                        |
-    | Sandbox           | Not yet available                                                       |
-    | Integration test  | Not yet available                                                       |
-    | Production        | Not yet available                                                       |
+    | Sandbox           | `https://sandbox.api.service.nhs.uk/covid-medical-exemptions/FHIR/R4`   |
+    | Integration test  | `https://int.api.service.nhs.uk/covid-medical-exemptions/FHIR/R4`       |
+    | Production        | `https://api.service.nhs.uk/covid-medical-exemptions/FHIR/R4`           |
 
     ### Sandbox testing
     Our [sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing):
@@ -124,10 +125,6 @@ info:
     For details of sandbox test scenarios, or to try out the sandbox using our 'Try this API' feature, see the documentation for each endpoint.
 
     Alternatively, you can try out the sandbox using our Postman collection:
-
-    TBD: *once initial deployment is completed*
-
-    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/TBD)
 
     ### Integration testing
     Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing):
@@ -153,7 +150,7 @@ servers:
   - url: 'https://api.service.nhs.uk/covid-medical-exemptions/FHIR/R4'
     description: Production environment.
 paths:
-  /CovidMedicalExemption:
+  /QuestionnaireResponse:
     get:
       summary: Get current COVID-19 medical exemption status
       operationId: get-covid-medical-exemption
@@ -175,10 +172,6 @@ paths:
         | Declined for Vaccination and Testing | `patient.identifier` = <code>https://fhir.nhs.uk/Id/nhs-number&#124;<X%5==4></code>  | HTTP Status 200 with exemption data in response body    |
 
         You can try out the sandbox using the 'Try this API' feature on this page.
-
-        Alternatively, you can try out the sandbox using our Postman collection:
-
-        [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e999c0aeddefe51b6b89)
       parameters:
         - name: patient.identifier
           in: query
@@ -190,14 +183,21 @@ paths:
             type: string
             pattern: ^https:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|[0-9]+$
             example: "https://fhir.nhs.uk/Id/nhs-number|9912003888"
+        - name: questionnaire
+          in: query
+          description: |
+            The questionnaire to be consumed
+          schema:
+            type: string
+            example: "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"
         - name: Authorization
           in: header
           description: |
             An OAuth 2.0 bearer token, obtained using our [NHS login pattern](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/user-restricted-restful-apis-nhs-login-separate-authentication-and-authorisation).
           schema:
             type: string
-            pattern: '^Bearer\ [[:ascii:]]+$'
-            example: 'Bearer g1112R_ccQ1Ebbb4gtHBP1aaaNM'
+            pattern: ^Bearer\ .+$
+            example: Bearer g1112R_ccQ1Ebbb4gtHBP1aaaNM
         - name: X-Correlation-ID
           in: header
           required: false
@@ -208,7 +208,7 @@ paths:
           schema:
             type: string
             format: uuid
-            example: "\"11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA\""
+            example: "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA"
       responses:
         '200':
           description: |
@@ -230,6 +230,7 @@ paths:
             | HTTP status | Error code                 | Description                                                          |
             | ----------- | -------------------------- | -------------------------------------------------------------------- |
             | 400         | `processing`               | Missing or invalid NHS number                                        |
+            | 400         | `processing`               | Missing or invalid questionnaire                                     |
             | 401         | `processing`               | Missing or invalid ID token                                          |
             | 401         | `processing`               | Missing or invalid OAuth 2.0 bearer token                            |
             | 401         | `processing`               | NHS number in request doesn't match NHS number in NHS login account  |
