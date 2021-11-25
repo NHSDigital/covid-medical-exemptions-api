@@ -1,4 +1,11 @@
 <ProxyEndpoint name="default">
+  <PreFlow>
+    <Request>
+      <Step>
+        <Name>KeyValueMapOperations.GetVariables</Name>
+      </Step>
+    </Request>
+  </PreFlow>
   <Flows>
     <Flow name="OptionsPreFlight">
       <Request/>
@@ -38,7 +45,6 @@
       </Condition>
     </Flow>
   </Flows>
-  <PreFlow/>
   <PostClientFlow name="PostClientFlow">
     <Response>
       <Step>
@@ -62,9 +68,4 @@
   <RouteRule name="covid-medical-exemptions-target">
     <TargetEndpoint>covid-medical-exemptions-target</TargetEndpoint>
   </RouteRule>
-  <DefaultFaultRule>
-    <Step>
-      <Name>AssignMessage.Errors.CatchAllMessage</Name>
-    </Step>
-  </DefaultFaultRule>
 </ProxyEndpoint>

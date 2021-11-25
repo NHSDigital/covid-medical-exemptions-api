@@ -14,9 +14,31 @@ APIGEE_ENVIRONMENTS:
     display_name: Reference
   - name: sandbox
     display_name: Sandbox
-# Enable int environment when ready by uncommenting:
-#   - name: int
-#     display_name: Integration Testing
+    portal_visibility: false
+  - name: int
+    display_name: Integration Testing
+    portal_visibility: false
+  # - name: prod
+  #   display_name: Production
+  #   portal_visibility: false
+ACCESS_MODES:
+  - name: user-restricted
+    nameSuffix: '-user-restricted'
+    displayName: User Restricted
+    scopes: [
+      'urn:nhsd:apim:user-nhs-login:P9:covid-medical-exemptions',
+      'urn:nhsd:apim:user-nhs-login:P5:covid-medical-exemptions'
+    ]
+    requireCallbackUrl: false
+    description: User restricted
+  - name: application-restricted
+    nameSuffix: -application-restricted
+    displayName: Application-Restricted
+    scopes: [
+      'urn:nhsd:apim:app:level3:covid-medical-exemptions'
+    ]
+    requireCallbackUrl: false
+    description: Application Restricted
 ---
 meta:
   api:
@@ -28,38 +50,40 @@ meta:
 apigee:
   environments:
 {% for ENV in APIGEE_ENVIRONMENTS %}
-{% set TITLE = PRODUCT_DISPLAY_NAME + ' (' + ENV.display_name + ' Environment)' %}
 {% set NAME = SERVICE_NAME + '-' + ENV.name %}
   - name: {{ ENV.name }}
     products:
-      - name: {{ NAME }}
-        approvalType: auto
+{% set approval_type = ENV.approval_type | default('auto') %}
+{% for MODE in ACCESS_MODES %}
+      - name: covid-medical-exemptions-{{ ENV.name }}{{ MODE.nameSuffix }}
+        approvalType: {{ approval_type }}
         attributes:
           - name: access
             value: public
           - name: ratelimit
-            value: 300pm
-        description: {{ DESCRIPTION }}
-        displayName: {{ TITLE }}
+            value: {{ ENV.ratelimit | default('300pm') }}
+        description: {{ MODE.description }}
+        displayName: Covid Medical Exemptions - {{ MODE.displayName }} ({{ ENV.display_name }})
         environments: [ {{ ENV.name }} ]
         proxies:
-          - {{ SERVICE_NAME }}-{{ ENV.name }}
+          - covid-medical-exemptions-{{ ENV.name }}
           - identity-service-{{ ENV.name }}
-        scopes:
-          - 'urn:nhsd:apim:app:level3:{{ SERVICE_NAME }}'
-          - 'urn:nhsd:apim:user-nhs-id:aal3:{{ SERVICE_NAME }}'
-        quota: '300'
+        scopes: {{ MODE.scopes }}
+        quota: {{ ENV.quota | default('300') }}
         quotaInterval: '1'
         quotaTimeUnit: minute
+{% endfor %}
     specs:
       - name: {{ NAME }}
         path: {{ SERVICE_NAME }}.json
     api_catalog:
-      - edgeAPIProductName: {{ NAME }}
+{% for MODE in ACCESS_MODES %}
+      - edgeAPIProductName: covid-medical-exemptions-{{ ENV.name }}{{ MODE.nameSuffix }}
         anonAllowed: true
-        description: {{ DESCRIPTION }}
-        requireCallbackUrl: false
-        title: {{ TITLE }}
-        visibility: false
+        description: Covid Medical Exemptions API - {{ MODE.displayName|lower  }} access mode - {{ ENV.display_name|lower }} environment
+        requireCallbackUrl: {{ MODE.requireCallbackUrl }}
+        title: Covid Medical Exemptions - {{ MODE.displayName }} ({{ ENV.display_name }})
+        visibility: {{ ENV.portal_visibility | default(true) }}
         specId: {{ NAME }}
+{% endfor %}
 {% endfor %}
