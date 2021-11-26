@@ -123,7 +123,6 @@ async def get_authorised_headers(client_app):
     )
 
     token = await get_token(client_app, grant_type="client_credentials", _jwt=jwt)
-    print(token)
     return {"Authorization": f'Bearer {token["access_token"]}'}
 
 
@@ -244,7 +243,6 @@ def test_app(request):
     }
 
     api_products = get_product_names(request_params['suffixes'])
-    print(api_products)
 
     app = ApigeeApiDeveloperApps()
 
@@ -286,4 +284,3 @@ def test_product_and_app(request):
     yield product, app
     loop.run_until_complete(app.destroy_app())
     loop.run_until_complete(product.destroy_product())
-
