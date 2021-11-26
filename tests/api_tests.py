@@ -33,6 +33,7 @@ def _base_valid_uri(nhs_number) -> str:
 # def _valid_uri(nhs_number, questionnaire) -> str:
 #     return _base_valid_uri(nhs_number) + f"&questionnaire={questionnaire}"
 
+
 def _valid_uri() -> str:
     return "FHIR/R4?patient.identifier=12345"
 
@@ -178,7 +179,7 @@ async def test_cme_no_auth_bearer_token_provided(test_app, api_client: APISessio
         assert resp.headers["x-correlation-id"] == correlation_id
         assert body["issue"] == [
             {'code': 'forbidden', 'diagnostics': 'Provided access token is invalid', 'severity': 'error'}
-            ], body
+        ], body
 
 
 @pytest.mark.e2e
