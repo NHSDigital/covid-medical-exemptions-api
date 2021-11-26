@@ -53,6 +53,8 @@ release: clean publish build-proxy
 test:
 	make --no-print-directory -C sandbox test
 
-smoketest: poetry run pytest -v --junitxml=smoketest-report.xml -s -m smoketest
+smoketest:
+    poetry run pytest -v --junitxml=smoketest-report.xml -s -m smoketest
 
-e2etest: poetry run pytest -v --junitxml=e2e-report.xml -s -m e2e
+e2etest:
+    poetry run pytest -v --junitxml=e2e-report.xml -s -m e2e
