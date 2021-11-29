@@ -68,6 +68,9 @@ apigee:
         proxies:
           - covid-medical-exemptions-{{ ENV.name }}
           - identity-service-{{ ENV.name }}
+{% if ENV.name == 'int' %}
+          - identity-service-{{ ENV.name }}-no-smartcard
+{% endif %}
         scopes: {{ MODE.scopes }}
         quota: {{ ENV.quota | default('300') }}
         quotaInterval: '1'
