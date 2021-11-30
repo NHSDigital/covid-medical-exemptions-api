@@ -1,0 +1,13 @@
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.AddAdditionalHeaders">
+  <Add>
+      <Headers>
+          <Header name="Strict-Transport-Security">max-age=63072000; includeSubDomains; preload</Header>
+          <Header name="X-Frame-Options">DENY</Header>
+          <Header name="X-XSS-Protection">1; mode=block</Header>
+          <Header name="Cache-Control">no-store</Header>
+          <Header name="X-Content-Type-Options">nosniff</Header>
+      </Headers>
+  </Add>
+  <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+  <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

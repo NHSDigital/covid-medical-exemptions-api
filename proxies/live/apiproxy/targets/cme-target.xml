@@ -36,6 +36,9 @@
         <Condition>(accesstoken.auth_type == "user") and ((request.header.NHSD-User-Identity Is null) or (request.header.NHSD-User-Identity Equals ""))</Condition>
       </Step>
       <Step>
+        <Name>AssignMessage.AddAdditionalHeaders</Name>
+      </Step>
+      <Step>
         <Name>AccessEntity.GetApp</Name>
       </Step>
       <Step>
