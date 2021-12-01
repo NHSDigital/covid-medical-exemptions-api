@@ -1,24 +1,4 @@
 {
     "resourceType": "Bundle",
-    "entry": [
-        {
-            "resource": {
-                "resourceType": "Patient",
-                "identifier":  [
-                    {
-                        "system": "https://fhir.nhs.uk/Id/nhs-number",
-                        "value": "9912003888"
-                    }
-                ],
-                "name": [
-                    {
-                        "use": "official",
-                        "given": [ "John", "Jonah" ],
-                        "family": "Jameson"
-                    }
-                ],
-                "birthDate": "1960-01-01"
-            }
-        }
-    ]
+    "type": "searchset"
 }

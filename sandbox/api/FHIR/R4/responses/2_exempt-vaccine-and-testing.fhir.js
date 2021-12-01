@@ -3,6 +3,7 @@ export default (id) => ({
     "type": "searchset",
     "entry": [
         {
+            "fullUrl": `QuestionnaireResponse/${id}`,
             "resource": {
                 "resourceType": "QuestionnaireResponse",
                 "id": "2fa8f1b8-caea-4f3d-9978-c0839da568b2",
@@ -32,7 +33,7 @@ export default (id) => ({
                                 "valueCoding": {
                                     "system": "https://fhir.nhs.uk/CodeSystem/covid-vaccination-medical-exemption",
                                     "code": "2",
-                                    "display": "Approved: Exemption from COVID vaccination"
+                                    "display": "Approved: Exemption from COVID vaccination and testing"
                                 }
                             }
                         ]

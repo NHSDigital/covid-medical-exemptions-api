@@ -3,6 +3,7 @@ export default (id) => ({
     "type": "searchset",
     "entry": [
         {
+            "fullUrl": `QuestionnaireResponse/${id}`,
             "resource": {
                 "resourceType": "QuestionnaireResponse",
                 "id": "2fa8f1b8-caea-4f3d-9978-c0839da568b2",

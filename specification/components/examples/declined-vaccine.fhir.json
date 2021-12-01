@@ -47,22 +47,6 @@
                     }
                 ]
             }
-        },
-        {
-            "resource": {
-                "resourceType": "Patient",
-                "name": [
-                    {
-                        "use": "official",
-                        "given": [
-                            "John",
-                            "Jonah"
-                        ],
-                        "family": "Jameson"
-                    }
-                ],
-                "birthDate": "1960-01-01"
-            }
         }
     ]
 }
