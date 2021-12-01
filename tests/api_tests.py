@@ -30,13 +30,8 @@ def _base_valid_uri(nhs_number) -> str:
     return f"FHIR/R4/QuestionnaireResponse?patient.identifier=https://fhir.nhs.uk/Id/nhs-number%7C{nhs_number}"
 
 
-# TO DO - Use valid version of URL once implemented on backend
 def _valid_uri(nhs_number, questionnaire) -> str:
     return _base_valid_uri(nhs_number) + f"&questionnaire={questionnaire}"
-
-
-# def _valid_uri(nhs_number, questionnaire) -> str:
-#     return "FHIR/R4?patient.identifier=12345"
 
 
 async def _is_deployed(resp: ClientResponse, api_test_config: APITestSessionConfig) -> bool:
@@ -143,8 +138,8 @@ async def test_client_credentials_happy_path(test_app, api_client: APISessionCli
         body = await resp.json()
         assert "x-correlation-id" in resp.headers, resp.headers
         assert resp.headers["x-correlation-id"] == correlation_id
-        # TO DO - Use valid version of response body once implemented on backend
-        assert body["test"] == "test", body
+        assert body["resourceType"] == "Bundle", body
+        assert len(body["entry"]) == 1, body
 
 
 @pytest.mark.e2e
@@ -265,8 +260,8 @@ async def test_token_exchange_happy_path(test_app, api_client: APISessionClient)
         body = await resp.json()
         assert "x-correlation-id" in resp.headers, resp.headers
         assert resp.headers["x-correlation-id"] == correlation_id
-        # TO DO - Use valid version of response body once implemented on backend
-        assert body["test"] == "test", body
+        assert body["resourceType"] == "Bundle", body
+        assert len(body["entry"]) == 1, body
 
 
 @pytest.mark.e2e
