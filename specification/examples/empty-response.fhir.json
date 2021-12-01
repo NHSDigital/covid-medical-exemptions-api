@@ -1,5 +1,4 @@
 {
-    "resourceType": "Bundle",
-    "type": "searchset",
-    "entry": [ ]
+  "resourceType": "Bundle",
+  "type": "searchset"
 }

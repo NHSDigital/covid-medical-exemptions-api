@@ -3,18 +3,18 @@ export default (id) => ({
     "type": "searchset",
     "entry": [
         {
+            "fullUrl": `QuestionnaireResponse/${id}`,
             "resource": {
                 "resourceType": "QuestionnaireResponse",
                 "id": "2fa8f1b8-caea-4f3d-9978-c0839da568b2",
                 "questionnaire": "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption",
                 "status": "completed",
                 "subject": {
-                    "identifier": [
-                        {
-                            "system": "https://fhir.nhs.uk/Id/nhs-number",
-                            "value": id
-                        }
-                    ],
+                    "reference": "#p1",
+                    "identifier": {
+                        "system": "https://fhir.nhs.uk/Id/nhs-number",
+                        "value": id
+                    },
                     "display": "John Jonah Jameson"
                 },
                 "contained": [

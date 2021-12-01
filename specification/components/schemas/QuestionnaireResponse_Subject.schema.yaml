@@ -4,15 +4,15 @@ description: |
   organization, practitioner, device, etc.  This is who/what the answers 
   apply to, but is not necessarily the source of information.
 properties:
+  reference:
+    type: string
   identifier:
-    type: array
-    items:
-      type: object
-      properties:
-        system:
-          type: string
-        value:
-          type: string
+    type: object
+    properties:
+      system:
+        type: string
+      value:
+        type: string
   display:
     type: string
 additionalProperties: false

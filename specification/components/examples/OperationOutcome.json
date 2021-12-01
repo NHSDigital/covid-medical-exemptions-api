@@ -4,7 +4,7 @@
     {
       "severity": "error",
       "code": "processing",
-      "diagnostics": "Unknown search parameter 'codeing' for resource type 'Immunization'."
+      "diagnostics": "Unknown search parameter 'coding' for resource type 'QuestionnaireResponse'."
     }
   ]
 }
