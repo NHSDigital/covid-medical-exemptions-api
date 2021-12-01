@@ -9,12 +9,11 @@ export default (id) => ({
                 "questionnaire": "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption",
                 "status": "completed",
                 "subject": {
-                    "identifier": [
-                        {
-                            "system": "https://fhir.nhs.uk/Id/nhs-number",
-                            "value": id
-                        }
-                    ],
+                    "reference": "#p1",
+                    "identifier": {
+                        "system": "https://fhir.nhs.uk/Id/nhs-number",
+                        "value": id
+                    },
                     "display": "John Jonah Jameson"
                 },
                 "contained": [
