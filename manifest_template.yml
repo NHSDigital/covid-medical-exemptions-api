@@ -17,10 +17,8 @@ APIGEE_ENVIRONMENTS:
     portal_visibility: false
   - name: int
     display_name: Integration Testing
-    portal_visibility: false
   # - name: prod
   #   display_name: Production
-  #   portal_visibility: false
 ACCESS_MODES:
   - name: user-restricted
     nameSuffix: '-user-restricted'
