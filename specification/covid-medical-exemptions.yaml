@@ -59,7 +59,7 @@ info:
     ## API status and roadmap
 
     ### Status
-    This API is in [alpha](https://nhsd-confluence.digital.nhs.uk/display/APM/Alpha+phase), meaning:
+    This API is in [alpha](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#api-status), meaning:
     - it is available for testing but not yet for production use
     - we might make breaking changes
 
@@ -116,7 +116,7 @@ info:
     ### Sandbox testing
 
     Our [sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing):
-    
+
     * is for early developer testing
     * only covers a limited set of scenarios
     * is open access, so does not allow you to test authorisation
