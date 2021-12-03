@@ -14,14 +14,14 @@ info:
     email: api.management@nhs.net
   description: |
     ## Overview
-    Use this API to access a patient’s Coronavirus (COVID-19) medical exemption status.
+    Use this API to access a patient’s coronavirus (COVID-19) medical exemption status.
 
     You can:
     - get a patient's COVID-19 medical exemption status, based on their NHS number
 
     You get the following data:
     - current COVID-19 medical exemption status
-    - embedded Patient demographic details, including Date of Birth.
+    - embedded Patient demographic details, including date of birth.
 
     The patient demographic details might differ from those held in the [Personal Demographics Service (PDS)](https://digital.nhs.uk/services/demographics).
     To get demographic details from PDS, use the [Personal Demographics Service FHIR API](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir).
