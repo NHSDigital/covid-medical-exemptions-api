@@ -14,31 +14,27 @@ info:
     email: api.management@nhs.net
   description: |
     ## Overview
-    Use this API to access a patient’s COVID medical exemption status.
+    Use this API to access a patient’s coronavirus (COVID-19) medical exemption status.
 
     You can:
-    - get a patient's coronavirus (COVID-19) medical exemption status, based on their NHS number
+    - get a patient's COVID-19 medical exemption status, based on their NHS number
 
     You get the following data:
-    - current covid medical exemption status
-    - embedded patient demographic details, include birthDate
+    - current COVID-19 medical exemption status
+    - embedded Patient demographic details, including date of birth.
 
     The patient demographic details might differ from those held in the [Personal Demographics Service (PDS)](https://digital.nhs.uk/services/demographics).
     To get demographic details from PDS, use the [Personal Demographics Service FHIR API](https://digital.nhs.uk/developer/api-catalogue/personal-demographics-service-fhir).
 
-    ### Data Standards
+    ### Data standards
 
     This API uses the FHIR standard, and includes the resources:
       * [Bundle](https://www.hl7.org/fhir/bundle.html)
       * [Patient](https://www.hl7.org/fhir/patient.html)
-      * [QuestionnaireResponse](https://www.hl7.org/fhir/questionnaireresponse.html) [example](https://simplifier.net/guide/nhsdigital/COVID19VaccinationExemption)
+      * [QuestionnaireResponse](https://www.hl7.org/fhir/questionnaireresponse.html)
 
     It references resources:
-      * [Questionnaire](https://www.hl7.org/fhir/questionnaire.html) specifically [COVID19 Vaccination Medical Exemption Questionnaire](https://simplifier.net/guide/nhsdigital/COVID19VaccinationMedicalExemption)
-
-    External definitions:
-      * https://simplifier.net/guide/nhsdigital/Questionnaire
-      * https://simplifier.net/guide/nhsdigital/QuestionnaireResponse
+      * [Questionnaire](https://www.hl7.org/fhir/questionnaire.html) specifically [COVID-19 Vaccination Medical Exemption Questionnaire](https://simplifier.net/guide/nhsdigital/COVID19VaccinationMedicalExemption)
 
     ### Data availability, timing and quality
     All exemption records are verified to ensure the NHS number is correct before making them available via the API.
@@ -63,7 +59,7 @@ info:
     ## API status and roadmap
 
     ### Status
-    This API is in alpha, meaning:
+    This API is in [alpha](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#api-status), meaning:
     - it is available for testing but not yet for production use
     - we might make breaking changes
 
@@ -94,19 +90,21 @@ info:
     For more details see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
 
     ## Security and authorisation
-    This API is offers both:
-      * [user-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#user-restricted-apis)
-      * [application restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis)
+    This API offers two access modes: User restricted &amp; Application restricted.
 
-    Specifically, it uses the following security pattern:
-    - [User-restricted RESTful APIs - NHS login separate authentication and authorisation](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/user-restricted-restful-apis-nhs-login-separate-authentication-and-authorisation)
-    - [Application-restricted - Application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis)
+    ### User restricted
 
-    Note that:
-    - for user-restricted the end user must be a patient
-    - the calling application must strongly authenticate the end user using NHS login
-    - the end user must have their identity verified to 'high' (P9) level
-    - the NHS number in the request must match the NHS number in the NHS login account
+      * [Guides and Documentation](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#user-restricted-apis)
+      * [Authentication and Authorisation](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/user-restricted-restful-apis-nhs-login-separate-authentication-and-authorisation)
+      * for user-restricted the end user must be a patient
+      * the end user must have their identity verified to 'high' (P9) level
+      * the NHS number in the request must match the NHS number in the NHS login account
+
+    ### Application restricted
+
+      * [Guides and Documentation](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis)
+      * [Authentication and Authorisation](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis)
+      * the calling application must strongly authenticate the end user using NHS login
 
     ## Environments and testing
     | Environment       | Base URL                                                                |
@@ -116,7 +114,9 @@ info:
     | Production        | `https://api.service.nhs.uk/covid-medical-exemptions/FHIR/R4`           |
 
     ### Sandbox testing
+
     Our [sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing):
+
     * is for early developer testing
     * only covers a limited set of scenarios
     * is open access, so does not allow you to test authorisation
