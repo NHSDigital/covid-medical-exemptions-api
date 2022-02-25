@@ -31,8 +31,6 @@ properties:
     $ref: ./QuestionnaireResponse_Subject.schema.yaml
   contained:
     $ref: ./QuestionnaireResponse_Contained.schema.yaml
-  authored:
-    type: string
   item:
     type: array
     items:
