@@ -51,7 +51,7 @@ export default (id) => ({
                         linkId: "exemptionPeriodEnd",
                         answer: [
                             {
-                                valueDateTime: "2022-08-13T17:15:00+00:00",
+                                valueString: "null",
                             },
                         ],
                     },
