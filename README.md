@@ -24,7 +24,7 @@ The contents of this repository are protected by Crown Copyright (C).
 
 ### Requirements
 
-* make [windows](https://docs.microsoft.com/en-us/cpp/build/reference/nmake-reference?redirectedfrom=MSDN&view=msvc-170) [linux](https://www.gnu.org/software/make/)
+* make ([windows](https://docs.microsoft.com/en-us/cpp/build/reference/nmake-reference?redirectedfrom=MSDN&view=msvc-170), [linux](https://www.gnu.org/software/make/))
 * nodejs v12.22.10 + npm/yarn
 * python v3.8 + [poetry](https://github.com/python-poetry/poetry)
 * Java 8+
@@ -52,12 +52,6 @@ There are `make` commands that alias some of this functionality:
  * `lint` -- Lints the spec and code
  * `publish` -- Outputs the specification as a **single file** into the `build/` directory
  * `serve` -- Serves a preview of the specification in human-readable format
-
-### Running locally
-To run the swagger api into http://0.0.0.0:5000, the you need to execute:
- 1. `make install`
- 2. `make build` created the build into `/build` directory
- 3. `make serve` from `/build` directory
 
 ### Testing
 Each API and team is unique. We encourage you to use a `test/` folder in the root of the project, and use whatever testing frameworks or apps your team feels comfortable with. It is important that the URL your test points to be configurable. We have included some stubs in the Makefile for running tests.
