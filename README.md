@@ -8,6 +8,7 @@ This is a RESTful HL7® FHIR® API specification for the *Template API*.
 * `sandbox/` This NodeJS application implements a mock implementation of the service. Use it as a back-end service to the interactive documentation to illustrate interactions and concepts. It is not intended to provide an exhaustive/faithful environment suitable for full development and testing.
 * `scripts/` Utilities helpful to developers of this specification.
 * `proxies/` Live (connecting to another service) and sandbox (using the sandbox container) Apigee API Proxy definitions.
+* `azure/` Microsoft Azure deployment pipeline.
 
 Consumers of the API will find developer documentation on the [NHS Digital Developer Hub](https://developer.digital.nhs.uk/).
 
@@ -22,9 +23,10 @@ The contents of this repository are protected by Crown Copyright (C).
 ## Development
 
 ### Requirements
-* make
-* nodejs + npm/yarn
-* [poetry](https://github.com/python-poetry/poetry)
+
+* make [windows](https://docs.microsoft.com/en-us/cpp/build/reference/nmake-reference?redirectedfrom=MSDN&view=msvc-170) [linux](https://www.gnu.org/software/make/)
+* nodejs v12.22.10 + npm/yarn
+* python v3.8 + [poetry](https://github.com/python-poetry/poetry)
 * Java 8+
 
 ### Install
@@ -50,6 +52,12 @@ There are `make` commands that alias some of this functionality:
  * `lint` -- Lints the spec and code
  * `publish` -- Outputs the specification as a **single file** into the `build/` directory
  * `serve` -- Serves a preview of the specification in human-readable format
+
+### Running locally
+To run the swagger api into http://0.0.0.0:5000, the you need to execute:
+ 1. `make install`
+ 2. `make build` created the build into `/build` directory
+ 3. `make serve` from `/build` directory
 
 ### Testing
 Each API and team is unique. We encourage you to use a `test/` folder in the root of the project, and use whatever testing frameworks or apps your team feels comfortable with. It is important that the URL your test points to be configurable. We have included some stubs in the Makefile for running tests.
@@ -97,3 +105,19 @@ Successful deployment of the API Proxy requires:
 The Key-Value maps need to be specifed within the [api-management-infrasture](https://github.com/NHSDigital/api-management-infrastructure) repository to be able to be used with the API proxy.
 
 :bulb: For Sandbox-running environments (`test`) these need to be present for successful deployment but can be set to empty/dummy values.
+
+#### Troubleshooting
+
+Depending the local setup `make install` might raise an error:
+```
+...
+The lock file might not be compatible with the current version of Poetry.
+Upgrade Poetry to ensure the lock file is read properly or, alternatively, regenerate the lock file with the `poetry lock` command.
+Installing dependencies from lock file
+
+[NonExistentKey]
+'Key "reference" does not exist.'
+...
+```
+
+The fix is re-generate `poetry.lock` file by removing it and running `make install` again. This process will create a new update `poetry.lock` file.
