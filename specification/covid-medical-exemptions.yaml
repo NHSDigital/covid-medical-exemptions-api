@@ -136,9 +136,15 @@ info:
     For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
 
     ## Onboarding
-    You need to get your software approved by us before it can go live with this API. We call this onboarding. The onboarding process can sometimes be quite long, so it’s worth planning well ahead.
 
-    Details to follow.
+    1. Complete an application through https://portal.developer.nhs.uk/ to the developer environment
+        1. The DDA team will approve access through the portal. The portal will provide credentials.
+    1. Onboard using the Supplier Conformance Assessment List (SCAL) process to confirm the use case and identify which API's access needs to be granted for
+        1. The Direct Data Access team as the API producer will be notified as part of the review team
+        1. The DDA team will contact you to confirm any details needed before permission can be granted
+    1. Complete an application through https://portal.developer.nhs.uk/ to the live environment
+        1. The DDA team will approve access through the portal. The portal will provide credentials.
+
 servers:
   - url: 'https://sandbox.api.service.nhs.uk/covid-medical-exemptions/FHIR/R4'
     description: Sandbox environment.
