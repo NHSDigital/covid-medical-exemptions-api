@@ -79,11 +79,11 @@ extends:
           - template: ./templates/run-tests.yml
             parameters:
               smoke_tests: true
-      # - environment: prod
-      #   depends_on:
-      #     - internal_qa
-      #     - internal_qa_sandbox
-      #   post_deploy:
-      #     - template: ./templates/run-tests.yml
-      #       parameters:
-      #         smoke_tests: true
+      - environment: prod
+        depends_on:
+          - internal_qa
+          - internal_qa_sandbox
+        post_deploy:
+          - template: ./templates/run-tests.yml
+            parameters:
+              smoke_tests: true
