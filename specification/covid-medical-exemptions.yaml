@@ -34,7 +34,7 @@ info:
       * [QuestionnaireResponse](https://www.hl7.org/fhir/questionnaireresponse.html)
 
     It references resources:
-      * [Questionnaire](https://www.hl7.org/fhir/questionnaire.html) specifically [COVID-19 Vaccination Medical Exemption Questionnaire](https://simplifier.net/guide/nhsdigital/COVID19VaccinationMedicalExemption)
+      * [Questionnaire](https://www.hl7.org/fhir/questionnaire.html) specifically [COVID-19 Vaccination Medical Exemption Questionnaire](https://simplifier.net/resolve?target=simplifier&scope=uk.nhsdigital.r4.test@2.4.33prerelease&canonical=https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption)
 
     ### Data availability, timing and quality
     All exemption records are verified to ensure the NHS number is correct before making them available via the API.
@@ -180,7 +180,7 @@ paths:
           in: query
           description: |
             The patient's NHS number.
-            Expressed as `<type>|<value>` where `<type>` must be `https://fhir.nhs.uk/Id/nhs-number` and `<value>` must be a [valid NHS number](https://www.datadictionary.nhs.uk/data_dictionary/attributes/n/nhs/nhs_number_de.asp).
+            Expressed as `<type>|<value>` where `<type>` must be `https://fhir.nhs.uk/Id/nhs-number` and `<value>` must be a [valid NHS number](https://www.datadictionary.nhs.uk/attributes/nhs_number.html).
           required: true
           schema:
             type: string
