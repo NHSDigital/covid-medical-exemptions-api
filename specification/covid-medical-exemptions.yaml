@@ -34,7 +34,7 @@ info:
       * [QuestionnaireResponse](https://www.hl7.org/fhir/questionnaireresponse.html)
 
     It references resources:
-      * [Questionnaire](https://www.hl7.org/fhir/questionnaire.html) specifically [COVID-19 Vaccination Medical Exemption Questionnaire](https://simplifier.net/resolve?target=simplifier&scope=uk.nhsdigital.r4.test@2.4.33prerelease&canonical=https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption)
+      * [Questionnaire](https://www.hl7.org/fhir/questionnaire.html) specifically [COVID-19 Vaccination Medical Exemption Questionnaire](https://simplifier.net/resolve?target=simplifier&scope=uk.nhsdigital.r4&canonical=https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption)
 
     ### Data availability, timing and quality
     All exemption records are verified to ensure the NHS number is correct before making them available via the API.
