@@ -4,25 +4,114 @@ DESCRIPTION: Covid Medical Exemptions
 APIGEE_ENVIRONMENTS:
   - name: internal-dev
     display_name: Internal Development
+    ratelimiting:
+      covid-medical-exemptions-internal-dev:
+        quota:
+          enabled: true
+          limit: 300
+          interval: 1
+          timeunit: minute
+        spikeArrest:
+          enabled: true
+          ratelimit: 300pm
+      app:
+        quota:
+          enabled: false
+        spikeArrest:
+          enabled: false
   - name: internal-dev-sandbox
     display_name: Internal Development Sandbox
+    ratelimiting:
+      covid-medical-exemptions-internal-dev-sandbox:
+        quota:
+          enabled: false
+        spikeArrest:
+          enabled: false
+      app:
+        quota:
+          enabled: false
+        spikeArrest:
+          enabled: false
   - name: internal-qa
     display_name: Internal QA
   - name: internal-qa-sandbox
     display_name: Internal QA Sandbox
+    ratelimiting:
+      covid-medical-exemptions-internal-qa-sandbox:
+        quota:
+          enabled: false
+        spikeArrest:
+          enabled: false
+      app:
+        quota:
+          enabled: false
+        spikeArrest:
+          enabled: false
   - name: ref
     display_name: Reference
-    ratelimit: '210000pm'
-    quota: '210000'
+    ratelimiting:
+      covid-medical-exemptions-ref:
+        quota:
+          enabled: true
+          limit: '210000'
+          interval: 1
+          timeunit: minute
+        spikeArrest:
+          enabled: true
+          ratelimit: '210000pm'
+      app:
+        quota:
+          enabled: false
+        spikeArrest:
+          enabled: false
   - name: sandbox
     display_name: Sandbox
     portal_visibility: false
+    ratelimiting:
+      covid-medical-exemptions-sandbox:
+        quota:
+          enabled: false
+        spikeArrest:
+          enabled: false
+      app:
+        quota:
+          enabled: false
+        spikeArrest:
+          enabled: false
   - name: int
     display_name: Integration Testing
+    ratelimiting:
+      covid-medical-exemptions-int:
+        quota:
+          enabled: true
+          limit: '300'
+          interval: 1
+          timeunit: minute
+        spikeArrest:
+          enabled: true
+          ratelimit: '300pm'
+      app:
+        quota:
+          enabled: false
+        spikeArrest:
+          enabled: false
   - name: prod
     display_name: Production
-    ratelimit: '210000pm'
-    quota: '210000'
+    ratelimiting:
+      covid-medical-exemptions-prod:
+        quota:
+          enabled: true
+          limit: '210000'
+          interval: 1
+          timeunit: minute
+        spikeArrest:
+          enabled: true
+          ratelimit: '210000pm'
+      app:
+        quota:
+          enabled: false
+        spikeArrest:
+          enabled: false
 ACCESS_MODES:
   - name: user-restricted
     nameSuffix: '-user-restricted'
@@ -62,8 +151,8 @@ apigee:
         attributes:
           - name: access
             value: public
-          - name: ratelimit
-            value: {{ ENV.ratelimit | default('300pm') }}
+          - name: ratelimiting
+            value: {{ ENV.ratelimiting }}
         description: {{ MODE.description }}
         displayName: Covid Medical Exemptions - {{ MODE.displayName }} ({{ ENV.display_name }})
         environments: [ {{ ENV.name }} ]
@@ -74,9 +163,7 @@ apigee:
           - identity-service-{{ ENV.name }}-no-smartcard
 {% endif %}
         scopes: {{ MODE.scopes }}
-        quota: {{ ENV.quota | default('300') }}
-        quotaInterval: '1'
-        quotaTimeUnit: minute
+
 {% endfor %}
     specs:
       - name: {{ NAME }}
