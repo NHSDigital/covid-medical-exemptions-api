@@ -62,8 +62,17 @@ apigee:
         attributes:
           - name: access
             value: public
-          - name: ratelimit
-            value: {{ ENV.ratelimit | default('300pm') }}
+          - name: ratelimiting
+            value:
+              covid-medical-exemptions-{{ ENV.name }}:
+                quota:
+                  limit: {{ ENV.quota | default('300') }}
+                  interval: 1
+                  timeunit: minute
+                  enabled: true
+                spikeArrest:
+                  ratelimit: {{ ENV.ratelimit | default('300pm') }}
+                  enabled: true
         description: {{ MODE.description }}
         displayName: Covid Medical Exemptions - {{ MODE.displayName }} ({{ ENV.display_name }})
         environments: [ {{ ENV.name }} ]
@@ -74,9 +83,7 @@ apigee:
           - identity-service-{{ ENV.name }}-no-smartcard
 {% endif %}
         scopes: {{ MODE.scopes }}
-        quota: {{ ENV.quota | default('300') }}
-        quotaInterval: '1'
-        quotaTimeUnit: minute
+
 {% endfor %}
     specs:
       - name: {{ NAME }}
