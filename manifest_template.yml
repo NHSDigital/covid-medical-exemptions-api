@@ -19,6 +19,8 @@ APIGEE_ENVIRONMENTS:
     portal_visibility: false
   - name: int
     display_name: Integration Testing
+    ratelimit: '900pm'
+    quota: '900'
   - name: prod
     display_name: Production
     ratelimit: '210000pm'
