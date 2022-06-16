@@ -256,7 +256,7 @@ async def test_token_exchange_happy_path(test_app, api_client: APISessionClient)
         headers=headers,
         allow_retries=True
     ) as resp:
-        assert resp.status == 200, 'failed getting backend data'
+        assert resp.status == 200, f'failed getting backend data {await resp.json()}'
         body = await resp.json()
         assert "x-correlation-id" in resp.headers, resp.headers
         assert resp.headers["x-correlation-id"] == correlation_id
