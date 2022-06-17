@@ -105,7 +105,7 @@ async def test_wait_for_status(api_client: APISessionClient, api_test_config: AP
 @pytest.mark.asyncio
 async def test_check_cme_is_secured(api_client: APISessionClient):
 
-    resp = await api_client.get(_base_valid_uri("2295442338"), allow_retries=True)
+    resp = await api_client.get(_base_valid_uri("9912003888"), allow_retries=True)
     assert resp.status == 401
 
 
@@ -130,7 +130,7 @@ async def test_client_credentials_happy_path(test_app, api_client: APISessionCli
     authorised_headers["X-Correlation-ID"] = correlation_id
 
     async with api_client.get(
-        _valid_uri("2295442338", "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"),
+        _valid_uri("9912003888", "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"),
         headers=authorised_headers,
         allow_retries=True
     ) as resp:
@@ -165,7 +165,7 @@ async def test_cme_no_auth_bearer_token_provided(test_app, api_client: APISessio
         "X-Correlation-ID": correlation_id
     }
     async with api_client.get(
-        _valid_uri("2295442338", "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"),
+        _valid_uri("9912003888", "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"),
         headers=headers,
         allow_retries=True
     ) as resp:
@@ -188,7 +188,7 @@ async def test_correlation_id_mirrored_in_resp_when_error(
     correlation_id = str(uuid4())
 
     async with api_client.get(
-        _valid_uri("2295442338", "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"),
+        _valid_uri("9912003888", "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"),
         headers={"Authorization": f"Bearer {access_token}", "X-Correlation-ID": correlation_id},
         allow_retries=True
     ) as resp:
@@ -252,7 +252,7 @@ async def test_token_exchange_happy_path(test_app, api_client: APISessionClient)
     }
 
     async with api_client.get(
-        _valid_uri("2295442338", "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"),
+        _valid_uri("9912003888", "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"),
         headers=headers,
         allow_retries=True
     ) as resp:
@@ -331,7 +331,7 @@ async def test_user_restricted_access_not_permitted(api_client: APISessionClient
     }
 
     async with api_client.get(
-        _valid_uri("2295442338", "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"),
+        _valid_uri("9912003888", "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"),
         headers=authorised_headers,
         allow_retries=True
     ) as resp:
@@ -379,7 +379,7 @@ async def test_token_exchange_invalid_identity_proofing_level_scope(api_client: 
     }
 
     async with api_client.get(
-        _valid_uri("2295442338", "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"),
+        _valid_uri("9912003888", "https://fhir.nhs.uk/Questionnaire/COVIDVaccinationMedicalExemption"),
         headers=headers,
         allow_retries=True
     ) as resp:
