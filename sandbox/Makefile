@@ -6,7 +6,7 @@ list:
 
 build:
 	cp -R ../specification .
-	docker build .
+	docker build --network=host .
 
 clean:
 	rm -rf ./node_modules
