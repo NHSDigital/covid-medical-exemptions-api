@@ -14,7 +14,7 @@
     "private": true,
     "dependencies": {
         "@babel/runtime": "^7.15.4",
-        "express": "^4.1.6",
+        "express": "^4.17.3",
         "express-openapi-validator": "^4.13.2",
         "loglevel": "^1.7.1",
         "swagger-express-middleware": "^4.0.2",
