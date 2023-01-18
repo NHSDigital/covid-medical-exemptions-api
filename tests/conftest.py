@@ -147,7 +147,7 @@ async def check_for_unauthorised_headers(client_app):
     token_response = await get_bad_token(client_app, grant_type="client_credentials", _jwt=jwt)
     assert token_response['status_code'] == 401
     assert token_response['body']['error'] == 'unauthorized_client'
-    assert token_response["body"]['error_description'] == 'you have tried to requests authorization but your ' \
+    assert token_response["body"]['error_description'] == 'you have tried to request authorization but your ' \
                                                           'application is not configured to use this authorization ' \
                                                           'grant type'
 
