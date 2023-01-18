@@ -223,7 +223,7 @@ async def check_for_unauthorised_token_exchange(test_app: ApigeeApiDeveloperApps
     )
     assert token_resp["status_code"] == 401
     assert token_resp["body"]['error'] == 'unauthorized_client'
-    assert token_resp["body"]['error_description'] == 'you have tried to requests authorization but your application ' \
+    assert token_resp["body"]['error_description'] == 'you have tried to request authorization but your application ' \
                                                       'is not configured to use this authorization grant type'
 
 
