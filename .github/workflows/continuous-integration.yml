@@ -29,6 +29,20 @@ jobs:
       - name: Install poetry
         run: pip install poetry
 
+      # Temporary fix to solve CI/CD issues
+      # - name: Cache poetry packages
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: ~/.cache/pypoetry
+      #     key: ${{ runner.os }}-build-cache-poetry-packages-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-cache-npm-packages-${{ hashFiles('**/package-lock.json') }}
+
+
       - name: Install repo
         run: make install
 
