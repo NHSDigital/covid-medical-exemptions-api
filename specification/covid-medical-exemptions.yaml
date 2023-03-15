@@ -23,7 +23,7 @@ info:
               </figure>
           </div>
           <div class="nhsd-m-emphasis-box__content-box">
-              <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break"><p class="nhsd-t-body">This API is <a href="https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses">in production but internal and now also deprecated</a>, meaning the API is not available for integration by external third parties.</p></div>
+              <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break"><p class="nhsd-t-body">This API is <a href="https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses">retired</a> and not available for use.</p></div>
           </div>
       </div>
     </div>
@@ -72,7 +72,7 @@ info:
     You must do this before you can go live (see ‘Onboarding’ below).
 
     ## API status and roadmap
-    This API is [in production but internal and now deprecated](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning the API is not available for integration by external third parties.
+    This API is [retired](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses) and not available for use.
     
     To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?tag=covid-medical-exemptions-api).
 
@@ -146,13 +146,7 @@ info:
 
     ## Onboarding
 
-    1. Complete an application through https://portal.developer.nhs.uk/ to the developer environment
-        1. The DDA team will approve access through the portal. The portal will provide credentials.
-    1. Onboard using the Supplier Conformance Assessment List (SCAL) process to confirm the use case and identify which API's access needs to be granted for
-        1. The Direct Data Access team as the API producer will be notified as part of the review team
-        1. The DDA team will contact you to confirm any details needed before permission can be granted
-    1. Complete an application through https://portal.developer.nhs.uk/ to the live environment
-        1. The DDA team will approve access through the portal. The portal will provide credentials.
+    This API is [retired](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses) and not available for use.
 
     ## Errors
     We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
