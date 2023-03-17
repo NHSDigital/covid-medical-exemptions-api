@@ -5,7 +5,6 @@ install-python:
 
 install-node:
 	npm install --legacy-peer-deps
-	cd sandbox && npm install --legacy-peer-deps
 
 .git/hooks/pre-commit:
 	cp scripts/pre-commit .git/hooks/pre-commit
@@ -40,21 +39,12 @@ start-sandbox:
 build-proxy:
 	scripts/build_proxy.sh
 
-_dist_include="pytest.ini poetry.lock poetry.toml pyproject.toml Makefile build/. tests"
+_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/."
 
-release: clean publish build-proxy
+release: clean publish
 	make -C sandbox build
 	mkdir -p dist
 	for f in $(_dist_include); do cp -r $$f dist; done
-	cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox.yml
-	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-qa-sandbox.yml
-	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-dev-sandbox.yml
 
 test:
-	make --no-print-directory -C sandbox test
-
-smoketest:
-	poetry run pytest -v --junitxml=smoketest-report.xml -s -m smoketest
-
-e2etest:
-	poetry run pytest -v --junitxml=e2e-report.xml -s -m e2e
+	@echo no tests for spec-only API
