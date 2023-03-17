@@ -42,7 +42,6 @@ build-proxy:
 _dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/."
 
 release: clean publish
-	make -C sandbox build
 	mkdir -p dist
 	for f in $(_dist_include); do cp -r $$f dist; done
 
