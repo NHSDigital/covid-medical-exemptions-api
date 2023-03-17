@@ -1,6 +1,3 @@
-SERVICE_NAME: covid-medical-exemptions
-PRODUCT_DISPLAY_NAME: Covid Medical Exemptions
-DESCRIPTION: Covid Medical Exemptions
 APIGEE_ENVIRONMENTS:
   - name: internal-dev
     display_name: Internal Development
@@ -12,37 +9,12 @@ APIGEE_ENVIRONMENTS:
     display_name: Internal QA Sandbox
   - name: ref
     display_name: Reference
-    ratelimit: '210000pm'
-    quota: '210000'
   - name: sandbox
     display_name: Sandbox
-    portal_visibility: false
   - name: int
     display_name: Integration Testing
-    ratelimit: '900pm'
-    quota: '900'
   - name: prod
     display_name: Production
-    ratelimit: '210000pm'
-    quota: '210000'
-ACCESS_MODES:
-  - name: user-restricted
-    nameSuffix: '-user-restricted'
-    displayName: User Restricted
-    scopes: [
-      'urn:nhsd:apim:user-nhs-login:P9:covid-medical-exemptions',
-      'urn:nhsd:apim:user-nhs-login:P5:covid-medical-exemptions'
-    ]
-    requireCallbackUrl: false
-    description: User restricted
-  - name: application-restricted
-    nameSuffix: -application-restricted
-    displayName: Application-Restricted
-    scopes: [
-      'urn:nhsd:apim:app:level3:covid-medical-exemptions'
-    ]
-    requireCallbackUrl: false
-    description: Application Restricted
 ---
 meta:
   api:
@@ -50,54 +22,13 @@ meta:
     guid: 2c15f237-9b62-4395-bea6-f1b7d30f1606
     spec_guids:
       - 7a0b9c38-abd4-41ec-83fd-04e373e5f519
-  schema_version: 1.1
+  schema_version: 1.3
 apigee:
   environments:
 {% for ENV in APIGEE_ENVIRONMENTS %}
-{% set NAME = SERVICE_NAME + '-' + ENV.name %}
+{% set NAME = 'covid-medical-exemptions-' + ENV.name %}
   - name: {{ ENV.name }}
-    products:
-{% set approval_type = ENV.approval_type | default('auto') %}
-{% for MODE in ACCESS_MODES %}
-      - name: covid-medical-exemptions-{{ ENV.name }}{{ MODE.nameSuffix }}
-        approvalType: {{ approval_type }}
-        attributes:
-          - name: access
-            value: public
-          - name: ratelimiting
-            value:
-              covid-medical-exemptions-{{ ENV.name }}:
-                quota:
-                  limit: {{ ENV.quota | default('300') }}
-                  interval: 1
-                  timeunit: minute
-                  enabled: true
-                spikeArrest:
-                  ratelimit: {{ ENV.ratelimit | default('300pm') }}
-                  enabled: true
-        description: {{ MODE.description }}
-        displayName: Covid Medical Exemptions - {{ MODE.displayName }} ({{ ENV.display_name }})
-        environments: [ {{ ENV.name }} ]
-        proxies:
-          - covid-medical-exemptions-{{ ENV.name }}
-          - identity-service-{{ ENV.name }}
-{% if ENV.name == 'int' %}
-          - identity-service-{{ ENV.name }}-no-smartcard
-{% endif %}
-        scopes: {{ MODE.scopes }}
-
-{% endfor %}
     specs:
       - name: {{ NAME }}
-        path: {{ SERVICE_NAME }}.json
-    api_catalog:
-{% for MODE in ACCESS_MODES %}
-      - edgeAPIProductName: covid-medical-exemptions-{{ ENV.name }}{{ MODE.nameSuffix }}
-        anonAllowed: true
-        description: Covid Medical Exemptions API - {{ MODE.displayName|lower  }} access mode - {{ ENV.display_name|lower }} environment
-        requireCallbackUrl: {{ MODE.requireCallbackUrl }}
-        title: Covid Medical Exemptions - {{ MODE.displayName }} ({{ ENV.display_name }})
-        visibility: {{ ENV.portal_visibility | default(true) }}
-        specId: {{ NAME }}
-{% endfor %}
+        path: covid-medical-exemptions.json
 {% endfor %}
